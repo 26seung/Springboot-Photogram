@@ -4,7 +4,38 @@
 #### 환경설정
 
 ##### DB연결
+도커를 이용하여 DB설정을 진행 MariaDB 이미지를 자동으로 설치하면서 DATABASE=photogram 을 생성하고 seung 계정도 생성   
+
     docker run -p 3306:3306 --name photogram -e MARIADB_ROOT_PASSWORD=1234 -e MARIADB_DATABASE=photogram -e MARIADB_USER=seung -e MARIADB_PASSWORD=1234 -d mariadb
+
+#### 인텔리제이 코드템플릿
+1. Lombok
+   - `import lombok.AllArgsConstructor;
+   import lombok.Builder;
+   import lombok.Data;
+   import lombok.NoArgsConstructor;
+    
+   @Data
+   @AllArgsConstructor
+   @NoArgsConstructor
+   @Builder`
+
+2. Logger
+   - `private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger( $CLASSNAME$.class );`
+
+#### 콘솔창 생상 이쁘게 꾸미기
+
+- application.properties
+
+```spring.output.ansi.enabled=ALWAYS```  
+
+- application.yml
+```
+spring:
+   output:
+      ansi:
+         enabled: ALWAYS
+```
 
 ---
 #### csrf

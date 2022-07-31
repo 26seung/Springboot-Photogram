@@ -56,3 +56,6 @@ dto 를 사용하면 domain 을 캡슐화 할 수 있다.
 후처리란 서버-DB를 지나서 ExceptionHandler등을 이용하여 처리  
 
 이러한 전처리&후처리 는 공통기능으로 `AOP` 라고 명칭한다.
+
+
+CMRespDto 를 사용하여 공통응답 DTO 사용

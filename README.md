@@ -59,3 +59,10 @@ dto 를 사용하면 domain 을 캡슐화 할 수 있다.
 
 
 CMRespDto 를 사용하여 공통응답 DTO 사용
+
+        CMrespDto, Script 비교
+
+        1. 클라이언트에게 응답할 때는 Script 가 좋음
+        2. Ajax 통신 - CMRespDto
+        3. Android 통신 - CMRespDto
+

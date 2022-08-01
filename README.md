@@ -73,3 +73,14 @@ CMRespDto 를 사용하여 공통응답 DTO 사용
 - **업캐스팅(Upcasting)**  
   자식 클래스의 객체가 부모 클래스 타입으로 형변환 되는 것을 말한다.
 - **다운캐스팅(Downcasting)**
+
+
+---
+#### 시큐리티 태그라이브러리
+JSP 같은 템플릿 엔진을 사용하는 경우에만 사용
+```
+<sec:authorize access = "isAuthenticated()" >
+    <sec:authentication property = "principal" var="principal" />
+</sec:authorize>
+```
+공통으로 사용되는 header 페이지 내부에 사용하여 `principal.user` 을 사용하여 정보를 간편하게 가져올 수 있다.

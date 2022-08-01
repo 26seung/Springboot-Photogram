@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -24,8 +25,10 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("직접 찾은 세션 정보: " + auth.getPrincipal());
 
-        PrincipalDetails mPrincipalDetails1 = (PrincipalDetails) auth.getPrincipal();
-        System.out.println("직접 찾은 세션 정보 2: "+ mPrincipalDetails1.getUser());
+        PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
+        System.out.println("직접 찾은 세션 정보 2: "+ mPrincipalDetails.getUser());
+
+//        model.addAttribute("principal",principalDetails.getUser());       //  security tag 사용하면 model 사용 필요없음
         return "user/update";
     }
 }

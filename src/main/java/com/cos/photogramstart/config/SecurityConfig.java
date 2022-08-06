@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(http);    // super 삭제 하면 기존 시큐리티가 가지고 있는 기능이 비활성화 됨
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/","/user/**","/image/**","/subscribe/**","/comment/**").authenticated()
+                .antMatchers("/","/user/**","/image/**","/subscribe/**","/comment/**","/api/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

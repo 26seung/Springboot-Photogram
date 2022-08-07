@@ -4,7 +4,9 @@ package com.cos.photogramstart.domain.user;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.cos.photogramstart.domain.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,8 +38,14 @@ public class User {
     private String profileImanageUrl;   // 사진
     private String role;    // 권한
 
-    private LocalDateTime createDate;
+    //  나는 연관관계의 주인이 아니다. 그러므로 테이블에 컬럼을 만들지 않는다.
+    //  User 를 SELECT 할 때 해당 User Id 로 등록된 image 를 모두 가져온다.
+    //  Lazy = User 를 SELECT 할 때 해당 User Id 로 등록된 image 를 가져오지마 / 대신 getImages() 함수가 호출될 때 가져온다
+    //  Eager = User 를 SELECT 할 때 해당 User Id 로 등록된 image 를 모두 Join 해서 가져온다.
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Image> images;     //  양방향 매핑
 
+    private LocalDateTime createDate;
     @PrePersist // DB 에 INSERT 되기 직전에 실행
     public void createDate() {
         this.createDate = LocalDateTime.now();

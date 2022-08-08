@@ -122,3 +122,21 @@ JSP 같은 템플릿 엔진을 사용하는 경우에만 사용
 
 - 연관관계 FK 는 Many 가 가진다
 - N : N 의 관계는 중간테이블이 생긴다.
+
+`mappedBy=""` 나는 연관관계의 주인이 아니다. 그러므로 테이블에 컬럼을 만들지 않는다.   
+`fetch = FetchType.LAZY` User 를 SELECT 할 때 해당 User Id 로 등록된 image 를 가져오지마 / 대신 getImages() 함수가 호출될 때 가져온다   
+`fetch = FetchType.Eager` User 를 SELECT 할 때 해당 User Id 로 등록된 image 를 모두 Join 해서 가져온다.
+
+
+---
+
+#### upload 파일경로
+
+upload 파일경로는 프로젝트 파일 외부에 생성하여 설정하는 것이 좋다.   
+그 이유는 프로젝트를 서버 실행을 하게되면 `.java(코드)` 들이 `컴파일` 되면서 `Target 폴더의 .class` 에 넣어주는 `deploy(배포)` 된다.   
+그런데 image 같은 `정적파일` 들은 `deploy(배포)` 되는데 시간이 조금 걸린다.  
+그래서 이러한 정적파일들이 프로젝트 내부에 저장되어 미쳐 읽히기 전에 코드 실행이 되게 되면 엑박이 발생할 수 있다.
+
+파일경로 설정은 `implements WebMvcConfigurer` 의 `addResourceHandlers` 메서드 를 이용하여 경로를 특정하도록 설정하였다.
+
+

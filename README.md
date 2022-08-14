@@ -140,3 +140,6 @@ upload 파일경로는 프로젝트 파일 외부에 생성하여 설정하는 �
 파일경로 설정은 `implements WebMvcConfigurer` 의 `addResourceHandlers` 메서드 를 이용하여 경로를 특정하도록 설정하였다.
 
 
+---
+
+#### 스칼라쿼리조인

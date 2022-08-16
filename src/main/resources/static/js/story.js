@@ -8,9 +8,12 @@
  */
 
 // (1) 스토리 로드하기
+
+let page = 0;
+
 function storyLoad() {
 	$.ajax({
-		url: `/api/image`,
+		url: `/api/image?page=${page}`,
 		dataType: "json"
 	}).done(res => {
 		console.log(res);
@@ -83,7 +86,17 @@ function getStoryItem(image) {
 
 // (2) 스토리 스크롤 페이징하기
 $(window).scroll(() => {
+	// console.log("윈도우 scrollTop: ", $(window).scrollTop());
+	// console.log("문서의 height: ", $(document).height());
+	// console.log("윈도우 height: ", $(window).height());
 
+	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
+	console.log(checkNum)
+
+	if(checkNum < 1 && checkNum > -1){
+		page++;
+		storyLoad();
+	}
 });
 
 

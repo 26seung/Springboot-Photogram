@@ -37,7 +37,7 @@ public class UserService {
 
         dto.setSubscribeState(subscribeState==1);       //  true
         dto.setSubscribeCount(subscribeCount);
-//        System.out.println("dto: " + dto);
+//        System.out.println("dto: " + dto);        // 출력하면 오류 발생함 ㅠ
         return dto;
     }
 

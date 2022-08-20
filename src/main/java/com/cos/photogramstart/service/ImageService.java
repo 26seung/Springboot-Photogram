@@ -24,6 +24,16 @@ public class ImageService {
     @Transactional(readOnly = true)     //  영속성 컨텍스트 변경 감지를 해서, 더치 체킹, Flush(반영) 을 하지 않음,  트랜잭션을 사용하는 이유는 세션을 컨트롤러 단까지 끌고 오기 위해서
     public Page<Image> 이미지스토리(int principalId, Pageable pageable){
         Page<Image> images = imageRepository.mStory(principalId, pageable);
+
+        // images 좋아요 상태담기
+        images.forEach((image)->{
+            image.getLikes().forEach((like)->{
+                if(like.getUser().getId() == principalId){
+                    image.setLikeState(true);
+                }
+            });
+        });
+
         return images;
     }
 

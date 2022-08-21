@@ -2,6 +2,7 @@ package com.cos.photogramstart.domain.likes;
 
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class Likes {
     @JoinColumn(name = "imageId")
     @ManyToOne
     private Image image;
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;          //  1번 유저가 1번 이미지들 동일하게 중복으로 좋아할 수는 없으니 @UniqueConstraint 를 설정

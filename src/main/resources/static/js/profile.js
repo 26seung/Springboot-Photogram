@@ -90,24 +90,39 @@ function getSubscribeModalItem(u) {
 
 
 // (3) 유저 프로파일 사진 변경 (완)
-function profileImageUpload() {
-	$("#userProfileImageInput").click();
+function profileImageUpload(pageUserId, principalId) {
 
-	$("#userProfileImageInput").on("change", (e) => {
-		let f = e.target.files[0];
+	console.log("pageUserId: ",pageUserId);
+	console.log("principalId: ",principalId);
 
-		if (!f.type.match("image.*")) {
-			alert("이미지를 등록해야 합니다.");
-			return;
-		}
+	if (pageUserId != principalId){
+		alert("프로필 해당 유저가 아닙니다.")
+	}else{		
+			$("#userProfileImageInput").click();
+		
+			$("#userProfileImageInput").on("change", (e) => {
+				let f = e.target.files[0];
+		
+				if (!f.type.match("image.*")) {
+					alert("이미지를 등록해야 합니다.");
+					return;
+				}
+		
+				//서버에 이미지을 전송
+				let profileImageForm = $("#userProfileImageForm");
 
-		// 사진 전송 성공시 이미지 변경
-		let reader = new FileReader();
-		reader.onload = (e) => {
-			$("#userProfileImage").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
-	});
+				// FormData 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 key/value 쌍을 담을 수 있다.
+				let formData = new FormData(profileImageForm);
+
+
+				// 사진 전송 성공시 이미지 변경
+				let reader = new FileReader();
+				reader.onload = (e) => {
+					$("#userProfileImage").attr("src", e.target.result);
+				}
+				reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+			});
+	}
 }
 
 

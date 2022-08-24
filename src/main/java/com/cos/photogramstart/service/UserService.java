@@ -35,9 +35,15 @@ public class UserService {
         int subscribeState = subscribeRepository.mSubscribeState(principalId,pageUserId);
         int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
 
-        dto.setSubscribeState(subscribeState==1);       //  true
+        dto.setSubscribeState(subscribeState == 1);       //  true
         dto.setSubscribeCount(subscribeCount);
 //        System.out.println("dto: " + dto);        // 출력하면 오류 발생함 ㅠ
+
+        //  profile 페이지에서의 좋아요 개수 확인 .. front 단에서 ${image.likes.size} 로 사용해도 되지만 Back 에서 만들어진 데이터를 넘기는것이 좋음
+        userEntity.getImages().forEach(image -> {
+            image.setLikeCount(image.getLikes().size());
+        });
+
         return dto;
     }
 

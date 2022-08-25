@@ -15,7 +15,7 @@
 								id="userProfileImageInput" />
 						</form>
 
-						<img class="profile-image" src="#" onerror="this.src='/images/person.jpeg'"
+						<img class="profile-image" src="/upload/${dto.user.profileImanageUrl}" onerror="this.src='/images/person.jpeg'"
 							id="userProfileImage" />
 					</div>
 				</div>

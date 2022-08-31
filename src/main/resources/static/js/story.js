@@ -65,7 +65,7 @@ function getStoryItem(image) {
 			<p>${image.caption}</p>
 		</div>
 
-		<div id="storyCommentList-1">
+		<div id="storyCommentList-${image.id}">
 
 			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
 				<p>
@@ -81,8 +81,8 @@ function getStoryItem(image) {
 		</div>
 
 		<div class="sl__item__input">
-			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
-			<button type="button" onClick="addComment()">게시</button>
+			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
+			<button type="button" onClick="addComment(${image.id})">게시</button>
 		</div>
 
 	</div>
@@ -99,7 +99,7 @@ $(window).scroll(() => {
 	// console.log("윈도우 height: ", $(window).height());
 
 	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
-	console.log(checkNum)
+	// console.log(checkNum)
 
 	if(checkNum < 1 && checkNum > -1){
 		page++;
@@ -153,12 +153,13 @@ function toggleLike(imageId) {
 }
 
 // (4) 댓글쓰기
-function addComment() {
+function addComment(imageId) {
 
-	let commentInput = $("#storyCommentInput-1");
-	let commentList = $("#storyCommentList-1");
+	let commentInput = $(`#storyCommentInput-${imageId}`);
+	let commentList = $(`#storyCommentList-${imageId}`);
 
 	let data = {
+		imageId: imageId,
 		content: commentInput.val()
 	}
 
@@ -166,6 +167,18 @@ function addComment() {
 		alert("댓글을 작성해주세요!");
 		return;
 	}
+
+	$.ajax({
+		type:"post",
+		url:"/api/comment",
+		data:JSON.stringify(data),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        dataType: "json"
+	}).done(res=>{
+
+	}).fail(err=>{
+
+	});
 
 	let content = `
 			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 

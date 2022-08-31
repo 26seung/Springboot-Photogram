@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.image;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -34,6 +35,12 @@ public class Image {
     @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Likes> likes;
+
+    //  댓글
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Comment>comments;
+
     @Transient  // DB에 컬럼이 만들어지지 않는다.
     private boolean likeState;
     @Transient

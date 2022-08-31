@@ -172,25 +172,29 @@ function addComment(imageId) {
 		type:"post",
 		url:"/api/comment",
 		data:JSON.stringify(data),
-		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		contentType: "application/json; charset=utf-8",
         dataType: "json"
 	}).done(res=>{
+		console.log("addComment : ",res)
+		
+		let comment = res.data;
+
+		let content = `
+				  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
+					<p>
+					  <b>${comment.user.username} :</b>
+					  ${comment.content}
+					</p>
+					<button><i class="fas fa-times"></i></button>
+				  </div>
+		`;
+		commentList.prepend(content);
 
 	}).fail(err=>{
-
+		console.log("addComment : ",err)
 	});
 
-	let content = `
-			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
-			    <p>
-			      <b>GilDong :</b>
-			      댓글 샘플입니다.
-			    </p>
-			    <button><i class="fas fa-times"></i></button>
-			  </div>
-	`;
-	commentList.prepend(content);
-	commentInput.val("");
+	commentInput.val("");		//	인풋 필드를 깨끗하게 비워준다.
 }
 
 // (5) 댓글 삭제

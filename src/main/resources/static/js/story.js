@@ -7,6 +7,9 @@
 	(5) 댓글삭제
  */
 
+//	(0) 현재 로그인한 사용자 아이디
+let principalId = $("#principalId").val();
+
 // (1) 스토리 로드하기
 
 let page = 0;
@@ -72,13 +75,20 @@ function getStoryItem(image) {
 				<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"">
 				<p>
 					<b>${comment.user.username}:</b> ${comment.content}
-				</p>
+				</p>`;
 
-				<button>
+				if(principalId == comment.user.id){
+					item += `		
+				<button onClick="deleteComment(${comment.id})">
 					<i class="fas fa-times"></i>
-				</button>
+				</button>`;
+				}
+
+
+
+				item += `
 			</div>`;
-			
+
 			})
 
 			
@@ -191,7 +201,7 @@ function addComment(imageId) {
 					  <b>${comment.user.username} :</b>
 					  ${comment.content}
 					</p>
-					<button><i class="fas fa-times"></i></button>
+					<button onClick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
 				  </div>
 		`;
 		commentList.prepend(content);
@@ -204,8 +214,17 @@ function addComment(imageId) {
 }
 
 // (5) 댓글 삭제
-function deleteComment() {
-
+function deleteComment(commentId) {
+	$.ajax({
+		type: "delete",
+		url: `/api/comment/${commentId}`,
+		dataType: "json"
+	}).done(res=>{
+		console.log("deleteComment res: ", res)
+		$(`#storyCommentItem-${commentId}`).remove();
+	}).fail(err=>{
+		console.log("deleteComment err: ", err)
+	})
 }
 
 

@@ -65,19 +65,25 @@ function getStoryItem(image) {
 			<p>${image.caption}</p>
 		</div>
 
-		<div id="storyCommentList-${image.id}">
+		<div id="storyCommentList-${image.id}">`;
 
-			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+			image.comments.forEach((comment)=>{
+				item +=`
+				<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
+					<b>${comment.user.username}:</b> ${comment.content}
 				</p>
 
 				<button>
 					<i class="fas fa-times"></i>
 				</button>
+			</div>`;
+			
+			})
 
-			</div>
+			
 
+			item +=`
 		</div>
 
 		<div class="sl__item__input">

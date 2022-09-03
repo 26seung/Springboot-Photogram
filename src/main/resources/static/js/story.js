@@ -208,6 +208,7 @@ function addComment(imageId) {
 
 	}).fail(err=>{
 		console.log("addComment : ",err)
+		alert(err.responseJSON.data.content)
 	});
 
 	commentInput.val("");		//	인풋 필드를 깨끗하게 비워준다.

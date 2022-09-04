@@ -2,16 +2,16 @@ package com.cos.photogramstart.domain.user;
 
 // JPA - Java Persistance API (자바로 데이터를 영구적으로 저장(DB) 할 수 있는 API를 제공)
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
-
 import com.cos.photogramstart.domain.image.Image;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -51,5 +51,23 @@ public class User {
     @PrePersist // DB 에 INSERT 되기 직전에 실행
     public void createDate() {
         this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImanageUrl='" + profileImanageUrl + '\'' +
+                ", role='" + role + '\'' +
+                ", createDate=" + createDate +
+                '}';
     }
 }
